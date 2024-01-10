@@ -1,0 +1,30 @@
+
+###
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstname": "Anton",
+  "lastname":"Anton",
+  "email": "Anton@Email.ru",
+  "password":"444",
+  "role":  "ADMIN"
+}
+
+> {% client.global.set("auth-token", response.body.access_token);  %}
+
+
+
+###
+POST http://localhost:8080/resource
+Authorization: Bearer {{auth-token}}
+Content-Type: application/json
+
+{"id": 4}
+###
+
+GET http://localhost:8080/resource/4
+Authorization: Bearer {{auth-token}}
+
+
+
